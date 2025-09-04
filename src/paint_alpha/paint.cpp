@@ -6,6 +6,10 @@
 
 using namespace std;
 
+// TODO: move this somewhere better
+const string PROGRAM_NAME = "PAINT_ALPHA";
+const string VERSION = "1.0";
+
 int init(void) {
 
   glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -58,7 +62,7 @@ int main(int argc, char *argv[]) {
 
   glutInitWindowPosition(100, 100);
 
-  glutCreateWindow("Linhas");
+  glutCreateWindow(PROGRAM_NAME + "_" + VERSION);
 
   init();
 

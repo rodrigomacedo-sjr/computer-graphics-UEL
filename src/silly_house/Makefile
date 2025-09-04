@@ -1,7 +1,7 @@
 # Baseado no tutorial https://lazyfoo.net/tutorials/OpenGL/01_hello_opengl/linux/cli/index.php
 
 # OBJS specifies which files to compile as part of the project
-OBJS = main.cpp
+OBJS = *.cpp
 
 # CC specifies which compiler we're using
 CC = g++
@@ -14,7 +14,7 @@ COMPILER_FLAGS = -w
 LINKER_FLAGS = -lGL -lGLU -lglut
 
 # OBJ_NAME specifies the name of our exectuable
-OBJ_NAME = main
+OBJ_NAME = house
 
 # This is the target that compiles our executable
 all : $(OBJS)
