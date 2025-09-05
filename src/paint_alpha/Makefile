@@ -6,6 +6,9 @@ OBJS = *.cpp
 # CC specifies which compiler we're using
 CC = g++
 
+# VERSION
+VERSION = c++20
+
 # COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 COMPILER_FLAGS = -w
@@ -18,4 +21,4 @@ OBJ_NAME = paint
 
 # This is the target that compiles our executable
 all : $(OBJS)
-	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME) -std=$(VERSION)

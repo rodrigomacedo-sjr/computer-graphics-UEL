@@ -3,7 +3,28 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 
-using namespace std;
+int init(void);
+void display(void);
+
+int main(int argc, char *argv[]) {
+  glutInit(&argc, argv);
+
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+
+  glutInitWindowSize(640, 480);
+
+  glutInitWindowPosition(100, 100);
+
+  glutCreateWindow("Silly House");
+
+  init();
+
+  glutDisplayFunc(display);
+
+  glutMainLoop();
+
+  return 0;
+}
 
 int init(void) {
 
@@ -68,22 +89,3 @@ void display(void) {
   return;
 }
 
-int main(int argc, char *argv[]) {
-  glutInit(&argc, argv);
-
-  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-
-  glutInitWindowSize(640, 480);
-
-  glutInitWindowPosition(100, 100);
-
-  glutCreateWindow("Silly House");
-
-  init();
-
-  glutDisplayFunc(display);
-
-  glutMainLoop();
-
-  return 0;
-}

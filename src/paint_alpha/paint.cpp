@@ -2,13 +2,41 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#include <iostream>
+#include <format>
+#include <string>
 
-using namespace std;
+int init(void);
+void display(void);
+void handle_keyboard(GLubyte key, GLint x, GLint y);
+void handle_motion(GLint x, GLint y);
 
 // TODO: move this somewhere better
-const string PROGRAM_NAME = "PAINT_ALPHA";
-const string VERSION = "1.0";
+const std::string PROGRAM_NAME = "PAINT_ALPHA";
+const std::string VERSION = "1.0";
+
+int main(int argc, char *argv[]) {
+  glutInit(&argc, argv);
+
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+
+  glutInitWindowSize(640, 480);
+
+  glutInitWindowPosition(100, 100);
+
+  glutCreateWindow(format("{}_{}", PROGRAM_NAME, VERSION).c_str());
+
+  init();
+
+  glutDisplayFunc(display);
+
+  glutKeyboardFunc(handle_keyboard);
+
+  glutMotionFunc(handle_motion);
+
+  glutMainLoop();
+
+  return 0;
+}
 
 int init(void) {
 
@@ -37,7 +65,7 @@ void display(void) {
 }
 
 // Clear screen on pressing 'd'
-void handle_KeyboardFunc(GLubyte key, GLint x, GLint y) {
+void handle_keyboard(GLubyte key, GLint x, GLint y) {
   GLint m = glutGetModifiers();
   if (key == 'd') {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -46,33 +74,8 @@ void handle_KeyboardFunc(GLubyte key, GLint x, GLint y) {
 }
 
 void handle_motion(GLint x, GLint y) {
-  cout << "damn";
   glBegin(GL_POINT);
   glVertex2f(x, y);
   glEnd();
   glFlush();
-}
-
-int main(int argc, char *argv[]) {
-  glutInit(&argc, argv);
-
-  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-
-  glutInitWindowSize(640, 480);
-
-  glutInitWindowPosition(100, 100);
-
-  glutCreateWindow(PROGRAM_NAME + "_" + VERSION);
-
-  init();
-
-  glutDisplayFunc(display);
-
-  glutKeyboardFunc(handle_KeyboardFunc);
-
-  glutMotionFunc(handle_motion);
-
-  glutMainLoop();
-
-  return 0;
 }
