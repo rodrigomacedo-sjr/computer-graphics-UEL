@@ -5,25 +5,32 @@
 #include <format>
 #include <string>
 
+#include "palette.hpp"
+
 int init(void);
 void display(void);
 void handle_keyboard(GLubyte key, GLint x, GLint y);
 void handle_motion(GLint x, GLint y);
 
-// TODO: move this somewhere better
+// TODO: move this somewhere better 
 const std::string PROGRAM_NAME = "PAINT_ALPHA";
 const std::string VERSION = "1.0";
+const int WINDOW_LENGTH = 800;
+const int WINDOW_HEIGHT = 640;
+const int PALETTE_SIZE = 50;
+
+Pallete palette = Pallete(PALETTE_SIZE);
 
 int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
 
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-  glutInitWindowSize(640, 480);
+  glutInitWindowSize(WINDOW_LENGTH, WINDOW_HEIGHT);
 
   glutInitWindowPosition(100, 100);
 
-  glutCreateWindow(format("{}_{}", PROGRAM_NAME, VERSION).c_str());
+  glutCreateWindow(std::format("{}_{}", PROGRAM_NAME, VERSION).c_str());
 
   init();
 
@@ -40,24 +47,19 @@ int main(int argc, char *argv[]) {
 
 int init(void) {
 
-  glClearColor(1.0, 1.0, 1.0, 0.0);
+  glClearColor(0.0, 0.0, 0.0, 0.0);
 
   glMatrixMode(GL_PROJECTION);
 
-  gluOrtho2D(0.0, 640.0, 0.0, 480.0);
+  gluOrtho2D(0.0, WINDOW_LENGTH, 0.0, WINDOW_HEIGHT);
 
   return 0;
 }
 
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT);
-  glColor3f(1.0, 0.0, 0.0);
-  glBegin(GL_QUADS);
-  glVertex2f(100, 200);
-  glVertex2f(200, 200);
-  glVertex2f(100, 100);
-  glVertex2f(200, 100);
-  glEnd();
+
+  palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
 
   glFlush();
 
