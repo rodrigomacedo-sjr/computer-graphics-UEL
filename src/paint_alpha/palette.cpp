@@ -5,7 +5,6 @@ Pallete::Pallete(int s) { size = s; }
 void Pallete::draw_self(int x, int y) {
   int i = 0;
   for (auto color : colors) {
-
     glColor3f(color.r, color.g, color.b);
     glBegin(GL_QUADS);
     glVertex2f(x + i * 1.5 * size, y);

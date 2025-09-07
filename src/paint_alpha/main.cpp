@@ -3,14 +3,22 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 
+#include "canvas.hpp"
 #include "config.hpp"
 #include "palette.hpp"
 
+#include <iostream>
+
+// TODO: improve this somehow
+bool drawing = false;
+
 void display(void);
 void handle_keyboard(GLubyte key, GLint x, GLint y);
+void handle_mouse(GLint button, GLint action, GLint x, GLint y);
 void handle_motion(GLint x, GLint y);
 
 Pallete palette = Pallete(PALETTE_SIZE);
+Canvas canvas = Canvas();
 
 int main(int argc, char *argv[]) {
   init(argc, argv);
@@ -18,6 +26,8 @@ int main(int argc, char *argv[]) {
   glutDisplayFunc(display);
 
   glutKeyboardFunc(handle_keyboard);
+
+  glutMouseFunc(handle_mouse);
 
   glutMotionFunc(handle_motion);
 
@@ -27,9 +37,11 @@ int main(int argc, char *argv[]) {
 }
 
 void display(void) {
-  glClear(GL_COLOR_BUFFER_BIT);
+  canvas.clear();
 
   palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
+
+  canvas.set_color(canvas.current_color);
 
   glFlush();
 
@@ -40,14 +52,20 @@ void display(void) {
 void handle_keyboard(GLubyte key, GLint x, GLint y) {
   GLint m = glutGetModifiers();
   if (key == 'd') {
-    glClear(GL_COLOR_BUFFER_BIT);
+    canvas.clear();
+    palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
     glFlush();
   }
 }
 
+void handle_mouse(GLint button, GLint action, GLint x, GLint y) {
+  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN)
+    drawing = true;
+  else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP)
+    drawing = false;
+}
+
 void handle_motion(GLint x, GLint y) {
-  glBegin(GL_POINT);
-  glVertex2f(x, y);
-  glEnd();
-  glFlush();
+  if (drawing)
+    canvas.draw_point(x, WINDOW_HEIGHT - y);
 }
