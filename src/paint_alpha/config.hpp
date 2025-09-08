@@ -17,7 +17,7 @@ const int WINDOW_LENGTH = 800;
 const int WINDOW_HEIGHT = 640;
 const int PALETTE_SIZE = 50;
 const float PALETTE_SPACING = 1.5;
-const float MY_POINT_SIZE = 8.0;
+const float MY_POINT_SIZE = 2.0;
 const std::vector<float> BG_COLOR = {0.0, 0.0, 0.0, 0.0};
 
 int init(int argc, char *argv[]) {

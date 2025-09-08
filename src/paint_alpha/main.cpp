@@ -21,7 +21,10 @@ void handle_keyboard(GLubyte key, GLint x, GLint y);
 void handle_mouse(GLint button, GLint action, GLint x, GLint y);
 void handle_motion(GLint x, GLint y);
 void create_menu();
-void handle_submenu(GLint op);
+void handle_menu(GLint op);
+void handle_submenu1(GLint op);
+void handle_submenu2(GLint op);
+void handle_submenu3(GLint op);
 
 Pallete palette = Pallete(PALETTE_SIZE, PALETTE_SPACING);
 Canvas canvas = Canvas();
@@ -132,18 +135,35 @@ void handle_motion(GLint x, GLint y) {
 
 // TODO: move this somewhere else
 void create_menu() {
-  GLint menu, submenu1, submenu2;
-  submenu1 = glutCreateMenu(handle_submenu);
+  GLint menu, submenu1, submenu2, submenu3;
+  submenu1 = glutCreateMenu(handle_submenu1);
   glutAddMenuEntry("normal", 0);
   glutAddMenuEntry("line", 1);
   glutAddMenuEntry("spray", 2);
   glutAddMenuEntry("square", 3);
   glutAddMenuEntry("stamp", 4);
 
+  submenu2 = glutCreateMenu(handle_submenu2);
+  glutAddMenuEntry("thin", 0);
+  glutAddMenuEntry("okay", 1);
+  glutAddMenuEntry("thicc", 2);
+
+  submenu3 = glutCreateMenu(handle_submenu3);
+  glutAddMenuEntry("purple", 0);
+  glutAddMenuEntry("orange", 1);
+  glutAddMenuEntry("brown", 2);
+
+  menu = glutCreateMenu(handle_menu);
+  glutAddSubMenu("types", submenu1);
+  glutAddSubMenu("thickness", submenu2);
+  glutAddSubMenu("extra colors", submenu3);
+
   glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void handle_submenu(GLint op) {
+void handle_menu(GLint op) { return; }
+
+void handle_submenu1(GLint op) {
   switch (op) {
   case 0:
     mode = NORMAL;
@@ -159,6 +179,34 @@ void handle_submenu(GLint op) {
     break;
   case 4:
     mode = FIGURE;
+    break;
+  }
+}
+
+void handle_submenu2(GLint op) {
+  switch (op) {
+  case 0:
+    glPointSize(2.0);
+    break;
+  case 1:
+    glPointSize(4.0);
+    break;
+  case 2:
+    glPointSize(8.0);
+    break;
+  }
+}
+
+void handle_submenu3(GLint op) {
+  switch (op) {
+  case 0:
+    canvas.current_color = PURPLE;
+    break;
+  case 1:
+    canvas.current_color = ORANGE;
+    break;
+  case 2:
+    canvas.current_color = BROWN;
     break;
   }
 }

@@ -24,7 +24,7 @@ void Canvas::erase_point(int x, int y) {
   glVertex2f(x, y);
   glEnd();
   glFlush();
-  glPointSize(8.0);
+  glPointSize(2.0);
 }
 
 void Canvas::spray_point(int x, int y) {
@@ -36,7 +36,7 @@ void Canvas::spray_point(int x, int y) {
     glVertex2f(x + random() % 20 - 20, y + random() % 20 - 20);
   glEnd();
   glFlush();
-  glPointSize(8.0);
+  glPointSize(2.0);
 }
 
 void Canvas::start_lining(int x, int y) {
