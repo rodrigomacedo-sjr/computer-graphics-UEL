@@ -7,8 +7,6 @@
 #include "config.hpp"
 #include "palette.hpp"
 
-#include <iostream>
-
 // TODO: improve this somehow
 bool drawing = false;
 
@@ -17,7 +15,7 @@ void handle_keyboard(GLubyte key, GLint x, GLint y);
 void handle_mouse(GLint button, GLint action, GLint x, GLint y);
 void handle_motion(GLint x, GLint y);
 
-Pallete palette = Pallete(PALETTE_SIZE);
+Pallete palette = Pallete(PALETTE_SIZE, PALETTE_SPACING);
 Canvas canvas = Canvas();
 
 int main(int argc, char *argv[]) {
@@ -41,7 +39,7 @@ void display(void) {
 
   palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
 
-  canvas.set_color(canvas.current_color);
+  glColor3f(canvas.current_color.r, canvas.current_color.g, canvas.current_color.b);
 
   glFlush();
 
@@ -59,9 +57,10 @@ void handle_keyboard(GLubyte key, GLint x, GLint y) {
 }
 
 void handle_mouse(GLint button, GLint action, GLint x, GLint y) {
-  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN)
+  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN) {
+    canvas.current_color = palette.test_mouse(x, WINDOW_HEIGHT - y, canvas.current_color);
     drawing = true;
-  else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP)
+  } else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP)
     drawing = false;
 }
 

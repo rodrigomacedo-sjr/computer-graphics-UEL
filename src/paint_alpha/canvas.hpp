@@ -13,7 +13,6 @@ private:
 public:
   RGBColor current_color = WHITE;
   void clear(void);
-  void set_color(RGBColor new_color);
   void draw_point(int x, int y);
 };
 

@@ -6,8 +6,6 @@ void Canvas::clear(void) {
   glFlush();
 }
 
-void Canvas::set_color(RGBColor color) { glColor3f(color.r, color.g, color.b); }
-
 void Canvas::draw_point(int x, int y) {
   glColor3f(current_color.r, current_color.g, current_color.b);
   glBegin(GL_POINTS);

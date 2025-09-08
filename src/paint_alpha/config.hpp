@@ -15,6 +15,7 @@ const std::string VERSION = "1.0";
 const int WINDOW_LENGTH = 800;
 const int WINDOW_HEIGHT = 640;
 const int PALETTE_SIZE = 50;
+const float PALETTE_SPACING = 1.5;
 const std::vector<float> BG_COLOR = {0.0, 0.0, 0.0, 0.0};
 
 int init(int argc, char *argv[]) {

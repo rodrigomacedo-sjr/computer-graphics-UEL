@@ -25,12 +25,17 @@ const RGBColor WHITE = {"White", 1.0, 1.0, 1.0};
 
 class Pallete {
 private:
-  int size;
+  int sq_size;
+  float sq_spacing_ratio;
+  std::pair<int, int> origin_coord;
   std::vector<RGBColor> colors = {RED, GREEN, BLUE, YELLOW, PURPLE, CYAN, WHITE};
 
+  bool inside(int x, int y, int sq_origin_x, int sq_origin_y);
+
 public:
-  Pallete(int s);
+  Pallete(int s, float r);
   void draw_self(int x, int y);
+  RGBColor test_mouse(int x, int y, RGBColor current_color);
 };
 
 #endif
