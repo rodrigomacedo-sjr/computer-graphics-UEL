@@ -18,4 +18,9 @@ This project is an example of how to use the OpenGL API with the FreeGLUT librar
 
 ## [Paint Alpha](../src/paint_alpha/)
 
-In progress ...
+A solid implementation of the basic functionalities of paint.
+Functional 2D paint program to further explore the fundamentals of computer graphics, OpenGL and FreeGLUT.
+
+This project is an improvement uppon the class examples, and an exercise of C++ practices in computer graphics. It is implemented (and it is being updated) with an emphasis on modularity, separation of concerns and good code practices. It features: free draw, line, square, spray and stamp modes, line thickness variation and two ways of color selection.
+
+![PAINT_ALPHA_2.0 program open. Display straight, curved and sprayed line of different thickness, colors and sizes, joined by some rectangles of different sizes and stars, both with the same variety of colors.](imgs/paint_alpha_example.png)
