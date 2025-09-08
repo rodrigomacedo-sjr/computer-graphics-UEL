@@ -12,7 +12,7 @@
 #include <format>
 
 const std::string PROGRAM_NAME = "PAINT_ALPHA";
-const std::string VERSION = "1.0";
+const std::string VERSION = "2.0";
 const int WINDOW_LENGTH = 800;
 const int WINDOW_HEIGHT = 640;
 const int PALETTE_SIZE = 50;
