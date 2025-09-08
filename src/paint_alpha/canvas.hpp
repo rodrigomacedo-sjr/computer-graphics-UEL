@@ -14,6 +14,7 @@ public:
   RGBColor current_color = WHITE;
   void clear(void);
   void draw_point(int x, int y);
+  void erase_point(int x, int y);
 };
 
 #endif

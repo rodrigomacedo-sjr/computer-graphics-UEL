@@ -13,3 +13,11 @@ void Canvas::draw_point(int x, int y) {
   glEnd();
   glFlush();
 }
+
+void Canvas::erase_point(int x, int y) {
+  glColor3f(BLACK.r, BLACK.g, BLACK.b);
+  glBegin(GL_POINTS);
+  glVertex2f(x, y);
+  glEnd();
+  glFlush();
+}

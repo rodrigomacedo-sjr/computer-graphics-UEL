@@ -9,6 +9,7 @@
 
 // TODO: improve this somehow
 bool drawing = false;
+bool erasing = false;
 
 void display(void);
 void handle_keyboard(GLubyte key, GLint x, GLint y);
@@ -39,7 +40,8 @@ void display(void) {
 
   palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
 
-  glColor3f(canvas.current_color.r, canvas.current_color.g, canvas.current_color.b);
+  glColor3f(canvas.current_color.r, canvas.current_color.g,
+            canvas.current_color.b);
 
   glFlush();
 
@@ -48,7 +50,6 @@ void display(void) {
 
 // Clear screen on pressing 'd'
 void handle_keyboard(GLubyte key, GLint x, GLint y) {
-  GLint m = glutGetModifiers();
   if (key == 'd') {
     canvas.clear();
     palette.draw_self(10, WINDOW_HEIGHT - PALETTE_SIZE - 10);
@@ -57,14 +58,24 @@ void handle_keyboard(GLubyte key, GLint x, GLint y) {
 }
 
 void handle_mouse(GLint button, GLint action, GLint x, GLint y) {
-  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN) {
-    canvas.current_color = palette.test_mouse(x, WINDOW_HEIGHT - y, canvas.current_color);
+  GLint m = glutGetModifiers();
+
+  if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN &&
+      (m & GLUT_ACTIVE_SHIFT)) {
+    erasing = true;
+  } else if (button == GLUT_LEFT_BUTTON && action == GLUT_DOWN) {
+    canvas.current_color =
+        palette.test_mouse(x, WINDOW_HEIGHT - y, canvas.current_color);
     drawing = true;
-  } else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP)
+  } else if (button == GLUT_LEFT_BUTTON && action == GLUT_UP) {
+    erasing = false;
     drawing = false;
+  }
 }
 
 void handle_motion(GLint x, GLint y) {
-  if (drawing)
+  if (erasing)
+    canvas.erase_point(x, WINDOW_HEIGHT - y);
+  else if (drawing)
     canvas.draw_point(x, WINDOW_HEIGHT - y);
 }

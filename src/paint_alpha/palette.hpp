@@ -22,13 +22,15 @@ const RGBColor YELLOW = {"Yellow", 1.0, 1.0, 0.0};
 const RGBColor PURPLE = {"Purple", 1.0, 0.0, 1.0};
 const RGBColor CYAN = {"Cyan", 0.0, 1.0, 1.0};
 const RGBColor WHITE = {"White", 1.0, 1.0, 1.0};
+const RGBColor BLACK = {"Black", 0.0, 0.0, 0.0};
 
 class Pallete {
 private:
   int sq_size;
   float sq_spacing_ratio;
   std::pair<int, int> origin_coord;
-  std::vector<RGBColor> colors = {RED, GREEN, BLUE, YELLOW, PURPLE, CYAN, WHITE};
+  std::vector<RGBColor> colors = {RED,    GREEN, BLUE, YELLOW,
+                                  PURPLE, CYAN,  WHITE};
 
   bool inside(int x, int y, int sq_origin_x, int sq_origin_y);
 
